@@ -2,8 +2,8 @@ import React from 'react';
 import { shipInfoURL, buildTypes, buildTypeName } from './global';
 import Axios from 'axios';
 import FuzzySearch from 'fuzzy-search';
-import {FormGroup, TextField, Card, CardActionArea, CardContent, 
-    CardMedia, Typography, Grid} from '@material-ui/core';
+import {TextField, Card, CardActionArea, CardContent, FormControl,
+    CardMedia, Typography, Grid, InputLabel, Select, MenuItem} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 class Build extends React.Component {
@@ -14,7 +14,8 @@ class Build extends React.Component {
             minutes: 0,
             hours: 0,
             data: null,
-            searcher: null
+            searcher: null,
+            filter: 'none'
         };
     }
 
@@ -69,6 +70,13 @@ class Build extends React.Component {
         });
     }
 
+    filterHandler(event){
+        let filter = event.target.value;
+        this.setState({
+            filter: filter
+        });
+    }
+
     render(){
 
         let ships = [];
@@ -79,6 +87,14 @@ class Build extends React.Component {
                 this.state.minutes, this.state.seconds);
             if(searchTime != "00:00:00"){
                 ships = searcher.search(searchTime);
+            }
+            const filter = this.state.filter;
+            switch(filter){
+                case 'light':
+                case 'heavy':
+                case 'aviation':
+                case 'limited':
+                    ships = filterShipBuild(ships, filter);
             }
         }
 
@@ -121,15 +137,46 @@ class Build extends React.Component {
                         fullWidth
                     />
                 </Grid>
+                <Grid item xs={5}>
+                    <FormControl fullWidth>
+                        <InputLabel id="build-filter-label">Build filter</InputLabel>
+                        <Select
+                        labelId="build-filter"
+                        id="select-build-filter"
+                        value={this.state.filter}
+                        onChange={this.filterHandler.bind(this)}
+                        variant="outlined"
+                        >
+                            <MenuItem value='none'>No Filter</MenuItem>
+                            <MenuItem value='light'>Light</MenuItem>
+                            <MenuItem value='heavy'>Heavy</MenuItem>
+                            <MenuItem value='aviation'>Special</MenuItem>
+                            <MenuItem value='limited'>Event</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
             </Grid>
 
             <div>
-                {ships.map((ship) => <DisplayShipBuild ship={ship} />)}
+                {ships.map((ship, i) => <DisplayShipBuild key={"ship-" + i} ship={ship} />)}
             </div>
             
         </div>
         );
     }
+}
+
+function filterShipBuild(ships, filter){
+    const len = ships.length;
+    let output = [];
+    for(let i = 0; i < len; i++){
+        const ship = ships[i];
+        const availablity = ship.construction.availableIn;
+        if(availablity[filter]){
+            output.push(ship);
+        }
+    }
+    return output;
 }
 
 function make2digits(time){
@@ -203,7 +250,7 @@ function DisplayShipBuild({ship}){
     const classes = useStyles();
     return(
         <Card className={classes.root}>
-            <CardActionArea className={classes.details} onClick={console.log(ship)}>
+            <CardActionArea className={classes.details} onClick={() => console.log(ship)}>
                 <CardMedia
                     title={ship.names.code}
                 >
