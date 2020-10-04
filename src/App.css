@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.horizontal-card {
+  display: inline;
+}
+
+.time-search {
+  width: 30ch;
+}
+
+.main {
+  width: 100%;
+  padding: 2%;
+}
+
+.box {
+  border: black solid 1px;
+}

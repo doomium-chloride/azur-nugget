@@ -3,7 +3,8 @@ import { shipInfoURL, buildTypes, buildTypeName } from './global';
 import Axios from 'axios';
 import FuzzySearch from 'fuzzy-search';
 import {FormGroup, TextField, Card, CardActionArea, CardContent, 
-    CardMedia, Typography} from '@material-ui/core';
+    CardMedia, Typography, Grid} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 class Build extends React.Component {
     constructor(props){
@@ -82,42 +83,45 @@ class Build extends React.Component {
         }
 
         return(
-        <div>
-            <FormGroup>
-                <TextField
-                    id="build-hours"
-                    label="Hours"
-                    type="number"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    InputProps={{ inputProps: { min: 0, max: 99 } }}
-                    variant="filled"
-                    onChange={this.hourHandler.bind(this)}
-                />
-                <TextField
-                    id="build-minutes"
-                    label="Minutes"
-                    type="number"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    InputProps={{ inputProps: { min: 0, max: 59 } }}
-                    variant="filled"
-                    onChange={this.minuteHandler.bind(this)}
-                />
-                <TextField
-                    id="build-seconds"
-                    label="Seconds"
-                    type="number"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    InputProps={{ inputProps: { min: 0, max: 59 } }}
-                    variant="filled"
-                    onChange={this.secondHandler.bind(this)}
-                />
-            </FormGroup>
+        <div className="main">
+            <h1>
+                Enter build time
+            </h1>
+            <Grid container spacing={1}>
+                <Grid item xs={2}>
+                    <TextField
+                        id="build-hours"
+                        label="Hours"
+                        type="number"
+                        InputProps={{ inputProps: { min: 0, max: 99 } }}
+                        variant="outlined"
+                        onChange={this.hourHandler.bind(this)}
+                        fullWidth
+                    />
+                </Grid>
+                <Grid item xs={2}>
+                    <TextField
+                        id="build-minutes"
+                        label="Minutes"
+                        type="number"
+                        InputProps={{ inputProps: { min: 0, max: 59 } }}
+                        variant="outlined"
+                        onChange={this.minuteHandler.bind(this)}
+                        fullWidth
+                    />
+                </Grid>
+                <Grid item xs={2}>
+                    <TextField
+                        id="build-seconds"
+                        label="Seconds"
+                        type="number"
+                        InputProps={{ inputProps: { min: 0, max: 59 } }}
+                        variant="outlined"
+                        onChange={this.secondHandler.bind(this)}
+                        fullWidth
+                    />
+                </Grid>
+            </Grid>
 
             <div>
                 {ships.map((ship) => <DisplayShipBuild ship={ship} />)}
@@ -160,16 +164,52 @@ function getBuildTypes(ship){
     return types.join(', ');
 }
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      padding: '5%'
+    },
+    details: {
+      display: 'flex',
+      flexDirection: 'row',
+    },
+    content: {
+      flex: '1 0 auto',
+    },
+    cover: {
+      width: 151,
+    },
+    controls: {
+      display: 'flex',
+      alignItems: 'center',
+      paddingLeft: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
+    },
+    playIcon: {
+      height: 38,
+      width: 38,
+    },
+}));
+
+function makeRedirect(link){
+    return function(){
+        let win = window.open(link, '_blank');
+        win.focus();
+    }
+}
+
 function DisplayShipBuild({ship}){
     const types = getBuildTypes(ship);
+    const classes = useStyles();
     return(
-        <Card width="100%">
-            <CardActionArea>
+        <Card className={classes.root}>
+            <CardActionArea className={classes.details} onClick={console.log(ship)}>
                 <CardMedia
-                    image={ship.thumbnail}
                     title={ship.names.code}
-                />
-                <CardContent>
+                >
+                    <img src={ship.thumbnail} width="166px" height="166px"/>
+                </CardMedia>
+                <CardContent className={classes.content}>
                     <Typography gutterBottom variant="h5" component="h2">
                         {ship.names.en}
                     </Typography>
