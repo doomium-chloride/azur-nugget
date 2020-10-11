@@ -53,3 +53,58 @@
 .box {
   border: black solid 1px;
 }
+
+.juust-post {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2% 48% 48% 2%;
+  grid-template-rows: 2% 96% 2%;
+  grid-template-areas: 
+    ". . . ."
+    ". juust-main juust-reply ."
+    ". . . .";
+  margin-top: 5vh;
+  border-top: 1px solid black;
+}
+
+.juust-main {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.juust-replies {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.juust-pic > img {
+  width: 100%;
+}
+
+.juust-replies
+.juust-reply,
+.juust-subreply {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.juust-reply-main {
+  padding-top: 5%;
+  padding-left: 5%;
+  font-weight: bold;
+}
+
+.juust-reply-content {
+  padding-left: 10%;
+}
+
+.juust-subreply{
+  padding-left: 10%;
+}

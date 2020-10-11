@@ -16,6 +16,11 @@ function NavBar(){
                     Build time
                 </Button>
             </Grid>
+            <Grid item xs>
+                <Button onClick={() => history.push('/juustagram')}>
+                    Juustagram
+                </Button>
+            </Grid>
         </Grid>
     )
 }

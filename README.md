@@ -5,3 +5,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 This is my personal project in making an Azur Lane related web app.
 
 I don't own any of the assets.
+
+## Hosted on
+
+<https://azur-nugget.herokuapp.com/>
+
+It might take a while for the dynamo to start because I use free hosting.
