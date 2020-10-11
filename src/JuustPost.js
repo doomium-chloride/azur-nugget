@@ -12,6 +12,9 @@ function JuustPost({data}){
                 <div className="juust-name">
                     {poster}
                 </div>
+                <div className="juust-text">
+                    {text}
+                </div>
                 <div className="juust-pic">
                     <img src={picSrc} />
                 </div>

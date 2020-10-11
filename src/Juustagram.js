@@ -2,23 +2,25 @@ import React from 'react';
 import Axios from 'axios';
 import JuustPost from './JuustPost';
 import {nimiSocial} from './global';
-import {TextField, Button, Grid} from '@material-ui/core';
+import {Button} from '@material-ui/core';
+
+const loadMoreBy = 5;
 
 class Juustagram extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             data: null,
-            search: "",
-            showAll: false
+            limit: 5
         }
     }
     componentDidMount(){
         const that = this;
         Axios.get(nimiSocial).then(
             function(resp){
+                const data = resp.data.entries;// everything in entries
                 that.setState({
-                    data: resp.data
+                    data: data
                 });
             }
         ).catch(
@@ -28,45 +30,31 @@ class Juustagram extends React.Component{
         );
     }
 
-    searchHandler(event){
+    loadMore(){
+        const newLimit = this.state.limit + loadMoreBy;
         this.setState({
-            search: event.target.value
+            limit: newLimit
         });
     }
 
     render(){
         let posts = [];
         const data = this.state.data;
+        const limit = this.state.limit;
         if(data){
-            posts = data.entries;
+            posts = data.slice(0, limit);
         }
         return(
-            <div className="juustagram">
-                <Grid container spacing={1} className="juust-search-bar">
-                    <Grid item xs={10}>
-                        <TextField
-                            id="juust-search"
-                            label="Search Juustagram"
-                            type="text"
-                            variant="filled"
-                            onChange={this.searchHandler.bind(this)}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Button 
-                            variant = 'contained'
-                            className="center-button"
-                        >
-                            Show All
-                        </Button>
-                    </Grid>
-                </Grid>
-            
+            <div className="juustagram">     
                 <div className="juustagram-posts">
                     {posts.map(
                         (post, i) => <JuustPost data={post} key={"post-" + i} />
                     )}
+                </div>
+                <div className="extra-top-margin extra-bottom-margin">
+                        <Button variant='outlined' onClick={this.loadMore.bind(this)}>
+                            Load more
+                        </Button>
                 </div>
             </div>
         )

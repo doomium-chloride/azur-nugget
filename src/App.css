@@ -117,3 +117,15 @@
 .center-button {
   transform: translateY(25%);
 }
+
+.extra-top-margin {
+  margin-top: 5%;
+}
+
+.extra-bottom-margin {
+  margin-bottom: 5%;
+}
+
+.juust-name {
+  font-weight: bold;
+}
