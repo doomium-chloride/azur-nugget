@@ -108,3 +108,12 @@
 .juust-subreply{
   padding-left: 10%;
 }
+
+.juust-search-bar {
+  padding: 3%;
+  justify-content: center;
+}
+
+.center-button {
+  transform: translateY(25%);
+}
