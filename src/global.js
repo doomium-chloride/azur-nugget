@@ -13,6 +13,6 @@ export const buildTypeName = {
     limited: 'event',
     event: 'limited'
 };
-export const nimi = "https://nimiii.now.sh/api/";
+export const nimi = "https://nimii.now.sh/api/";
 export const nimiShips = nimi + 'ships/';
 export const nimiSocial = nimi + "social/";
