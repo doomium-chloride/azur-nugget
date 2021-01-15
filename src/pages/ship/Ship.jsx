@@ -23,17 +23,14 @@ const useStyles = makeStyles((theme) => ({
 
 function Ship() {
     const classes = useStyles();
-    const ships = useContext(shipContext);
+    const context = useContext(shipContext);
     const { name } = useParams();
     console.log("params", name);
     if (!name) {
         return null;
     }
 
-
-    const searcher = new FuzzySearch(ships, ['names.code', 'names.en', 'names.jp', 'names.cn'], { sort: true, caseSensitive: false });
-
-    const results = searcher.search(name);
+    const results = context.byNameSearcher.search(name);
 
     if (results.length <= 0) {
         return null;

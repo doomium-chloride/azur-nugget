@@ -6,14 +6,28 @@ import NavBar from "./NavBar";
 import Juustagram from "./pages/juust/Juustagram";
 import Axios from 'axios';
 import { shipInfoURL } from './global';
+import FuzzySearch from 'fuzzy-search';
 
 import "./App.css";
 
 const shipContextDefaultData = {
     ships: [],
+    searchByName: () => []
 };
 
 export const shipContext = createContext(shipContextDefaultData);
+
+const searcherOptions = {
+    sort: true,
+    caseSensitive: false
+};
+
+const searchByNameConfig = [
+    'names.code', 
+    'names.en', 
+    'names.jp', 
+    'names.cn'
+];
 
 function App() {
     const [ships, setShips] = useState(undefined);
@@ -22,8 +36,11 @@ function App() {
         Axios.get(shipInfoURL)
             .then(
                 function (resp) {
-                    const ships = resp.data;
-                    setShips(ships);
+                    const data = resp.data;
+                    setShips({
+                        ships: data,
+                        byNameSearcher: new FuzzySearch(data, searchByNameConfig, searcherOptions)
+                    });
                 }
             ).catch(
                 function () {
