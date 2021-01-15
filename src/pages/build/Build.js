@@ -1,5 +1,5 @@
 import React from 'react';
-import { shipInfoURL, buildTypes, buildTypeName } from './global';
+import { shipInfoURL, buildTypes, buildTypeName } from '../../global';
 import Axios from 'axios';
 import FuzzySearch from 'fuzzy-search';
 import {TextField, Card, CardActionArea, CardContent, FormControl,
@@ -265,6 +265,9 @@ function DisplayShipBuild({ship}){
                     </Typography>
                     <Typography variant="h6" component="h4">
                         {types}
+                    </Typography>
+                    <Typography variant="p" component="h5">
+                        {ship.construction.constructionTime}
                     </Typography>
                 </CardContent>
             </CardActionArea>

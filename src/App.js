@@ -1,8 +1,8 @@
 import React from 'react';
-import Build from './Build';
+import Build from './pages/build/Build';
 import { BrowserRouter, Route } from "react-router-dom";
 import NavBar from './NavBar';
-import Juustagram from './Juustagram';
+import Juustagram from './pages/juust/Juustagram';
 
 import './App.css';
 
