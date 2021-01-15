@@ -1,27 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import Axios from 'axios';
 import { shipInfoURL } from '../../global';
+import { Paper, Grid, TextField, Typography } from "@material-ui/core";
+import {shipContext} from '../../App';
+import { useEffect } from 'react';
 
 function ShipSearch() {
-    const ships = useContext(shipContext);
+    const context = useContext(shipContext);
     const [query, setQuery] = useState("");
-
+    
     return (
-        <h1>
-            Enter ship name
+        <div>
+            <h1>
+                Enter ship name
             </h1>
-        <Grid container spacing={1}>
-            <Grid item xs={12}>
-                <TextField
-                    id="build-hours"
-                    label="Hours"
-                    type="number"
-                    InputProps={{ inputProps: { min: 0, max: 99 } }}
-                    variant="outlined"
-                    onChange={this.hourHandler.bind(this)}
-                    fullWidth
-                />
+            <Grid container spacing={1}>
+                <Grid item xs={12}>
+                    <TextField
+                        id="search4ship"
+                        label="Ship name"
+                        type="text"
+                        variant="outlined"
+                        onChange={(event) => setQuery(event.target.value)}
+                        value={query}
+                        fullWidth
+                    />
+                </Grid>
             </Grid>
-        </Grid>
+        </div>
     )
 }
+
+export default ShipSearch;

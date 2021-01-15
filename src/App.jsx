@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import Build from "./pages/build/Build";
 import Ship from "./pages/ship/Ship";
+import ShipSearch from "./pages/ship/ShipSearch";
 import { BrowserRouter, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Juustagram from "./pages/juust/Juustagram";
@@ -60,11 +61,11 @@ function App() {
                 <NavBar />
                 <div className="App">
                     <Route path="/build" render={(props) => (
-                        <Build {...props} ships={ships} />
+                        <Build {...props} ships={ships.ships} />
                     )} />
                     <Route path="/juustagram" component={Juustagram} />
                     <Route exact path="/ship/:name" component={Ship} />
-                    <Route path="/ship" component={Ship} />
+                    <Route path="/ship" component={ShipSearch} />
                 </div>
             </BrowserRouter>
         </shipContext.Provider>
