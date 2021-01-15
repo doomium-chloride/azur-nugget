@@ -1,10 +1,11 @@
 import React from 'react';
 import { shipInfoURL, buildTypes, buildTypeName } from '../../global';
 import Axios from 'axios';
-import FuzzySearch from 'fuzzy-search';
 import {TextField, Card, CardActionArea, CardContent, FormControl,
     CardMedia, Typography, Grid, InputLabel, Select, MenuItem} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+
+const searchSpan = 5;
 
 class Build extends React.Component {
     constructor(props){
@@ -14,7 +15,6 @@ class Build extends React.Component {
             minutes: 0,
             hours: 0,
             data: null,
-            searcher: null,
             filter: 'none'
         };
     }
@@ -26,11 +26,8 @@ class Build extends React.Component {
             .then(
                 function(resp){
                     const ships = resp.data;
-                    const fuzzy = new FuzzySearch(ships, 
-                        ['construction.constructionTime']);
                     that.setState({
                         data: ships,
-                        searcher: fuzzy
                     });
                 }
             ).catch(
@@ -77,16 +74,32 @@ class Build extends React.Component {
         });
     }
 
+    searchShip(timeStr){
+        const output = [];
+        this.state.data.forEach(ship => {
+            const constructionTime = ship.construction.constructionTime;
+            if(isTimeWithin(timeStr, constructionTime, searchSpan)){
+                output.push(ship);
+            }
+        });
+        output.sort((ship1, ship2) => {
+            const ship1diff = timeBetween(ship1.construction.constructionTime, timeStr);
+            const ship2diff = timeBetween(ship2.construction.constructionTime, timeStr);
+            return ship1diff - ship2diff;
+        })
+        return output;
+    }
+
     render(){
 
         let ships = [];
 
-        if(this.state.searcher){
+        if(this.state.data){
             const searcher = this.state.searcher;
             const searchTime = constructionTime(this.state.hours, 
                 this.state.minutes, this.state.seconds);
             if(searchTime != "00:00:00"){
-                ships = searcher.search(searchTime);
+                ships = this.searchShip(searchTime);
             }
             const filter = this.state.filter;
             switch(filter){
@@ -104,7 +117,7 @@ class Build extends React.Component {
                 Enter build time
             </h1>
             <Grid container spacing={1}>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                     <TextField
                         id="build-hours"
                         label="Hours"
@@ -115,7 +128,7 @@ class Build extends React.Component {
                         fullWidth
                     />
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                     <TextField
                         id="build-minutes"
                         label="Minutes"
@@ -123,17 +136,6 @@ class Build extends React.Component {
                         InputProps={{ inputProps: { min: 0, max: 59 } }}
                         variant="outlined"
                         onChange={this.minuteHandler.bind(this)}
-                        fullWidth
-                    />
-                </Grid>
-                <Grid item xs={2}>
-                    <TextField
-                        id="build-seconds"
-                        label="Seconds"
-                        type="number"
-                        InputProps={{ inputProps: { min: 0, max: 59 } }}
-                        variant="outlined"
-                        onChange={this.secondHandler.bind(this)}
                         fullWidth
                     />
                 </Grid>
@@ -274,5 +276,39 @@ function DisplayShipBuild({ship}){
         </Card>
     )
 }
+
+function timeStr2Minutes(timeStr){
+    const splitTime = timeStr.split(':');
+    const hours = 60 * parseInt(splitTime[0]);
+    const mins = parseInt(splitTime[1]);
+    const secs = parseInt(splitTime[2]) / 60;
+    return hours + mins + secs;
+}
+
+/**
+ * returns time between time1 and 2
+ * @param {string} time1 
+ * @param {string} time2 
+ * @param {number} span 
+ */
+function timeBetween(time1, time2){
+    const mins1 = timeStr2Minutes(time1);
+    const mins2 = timeStr2Minutes(time2);
+    return Math.abs(mins1 - mins2);
+}
+
+/**
+ * checks if time 2 is within the "span" minutes of time 1
+ * returns a boolean
+ * @param {string} time1 
+ * @param {string} time2 
+ * @param {number} span 
+ */
+function isTimeWithin(time1, time2, span){
+    const diff = timeBetween(time1, time2);
+    return diff < span;
+}
+
+
 
 export default Build;
