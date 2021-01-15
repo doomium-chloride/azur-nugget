@@ -15,7 +15,7 @@ function Ship() {
     }
     
 
-    const searcher = new FuzzySearch(ships, ['names.code', 'names.en'], {sort: true, caseSensitive: false});
+    const searcher = new FuzzySearch(ships, ['names.code', 'names.en', 'names.jp', 'names.cn'], {sort: true, caseSensitive: false});
 
     const results = searcher.search(name);
 
