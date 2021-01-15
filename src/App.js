@@ -9,11 +9,11 @@ import { shipInfoURL } from './global';
 
 import "./App.css";
 
-const contextDefaultValue = {
+const shipContextDefaultData = {
     ships: [],
 };
 
-const context = createContext(contextDefaultValue);
+export const shipContext = createContext(shipContextDefaultData);
 
 function App() {
     const [ships, setShips] = useState(undefined);
@@ -32,17 +32,13 @@ function App() {
             )
     }, []);
 
-    useEffect(() => {
-        context.ships = ships;
-    })
-
     if (!ships) {
         console.log("no data");
         return null;
     }
 
     return (
-        <context.Provider>
+        <shipContext.Provider value={ships}>
             <BrowserRouter>
                 <NavBar />
                 <div className="App">
@@ -50,10 +46,11 @@ function App() {
                         <Build {...props} ships={ships} />
                     )} />
                     <Route path="/juustagram" component={Juustagram} />
+                    <Route exact path="/ship/:name" component={Ship} />
                     <Route path="/ship" component={Ship} />
                 </div>
             </BrowserRouter>
-        </context.Provider>
+        </shipContext.Provider>
     );
 }
 
