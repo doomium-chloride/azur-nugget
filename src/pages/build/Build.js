@@ -1,6 +1,5 @@
 import React from 'react';
-import { shipInfoURL, buildTypes, buildTypeName } from '../../global';
-import Axios from 'axios';
+import { buildTypes, buildTypeName } from '../../global';
 import {TextField, Card, CardActionArea, CardContent, FormControl,
     CardMedia, Typography, Grid, InputLabel, Select, MenuItem} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,31 +9,14 @@ const searchSpan = 5;
 class Build extends React.Component {
     constructor(props){
         super(props);
+        console.log("props", props);
         this.state = {
             seconds: 0,
             minutes: 0,
             hours: 0,
-            data: null,
+            data: props.ships,
             filter: 'none'
         };
-    }
-
-    componentDidMount(){
-        const that = this;
-
-        Axios.get(shipInfoURL)
-            .then(
-                function(resp){
-                    const ships = resp.data;
-                    that.setState({
-                        data: ships,
-                    });
-                }
-            ).catch(
-                function(){
-                    console.error("shipInfoURL fetch error");
-                }
-            )
     }
 
     hourHandler(event){
