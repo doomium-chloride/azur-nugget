@@ -1,7 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import JuustPost from './JuustPost';
-import {nimiSocial} from './global';
+import {nimiSocial} from '../../global';
 import {Button} from '@material-ui/core';
 
 const loadMoreBy = 5;
