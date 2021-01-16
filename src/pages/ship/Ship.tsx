@@ -6,6 +6,8 @@ import { Paper, Grid, GridListTile, Typography } from "@material-ui/core";
 import { shipContext } from '../../App';
 import FuzzySearch from 'fuzzy-search';
 import { makeStyles } from '@material-ui/core/styles';
+import {Ship as ShipType, Skill} from '../../types/shipTypes';
+import { shipContextType } from "../../types/miscType";
 
 const useStyles = makeStyles((theme) => ({
     layer: {
@@ -56,9 +58,8 @@ function fixSkillIconLink(shipId, link){
 
 function Ship() {
     const classes = useStyles();
-    const context = useContext(shipContext);
+    const context : shipContextType = useContext(shipContext);
     const { name } = useParams();
-    console.log("params", name);
     if (!name) {
         return null;
     }
@@ -69,8 +70,7 @@ function Ship() {
         return null;
     }
 
-    const ship = results[0];
-    console.log("ship", ship);
+    const ship : ShipType = results[0];
 
     return (
         <div className={classes.main}>
@@ -143,7 +143,7 @@ function Ship() {
                                     backgroundColor: skill.color
                                 }}>
                                 <Typography component="h5" variant="h5" >
-                                    {skill.names.en || skill.names.jp || skill.names.cn || skill.names.kr}
+                                    {skill.names.en || skill.names.jp || skill.names.cn || skill.names.kr || "No name?"}
                                 </Typography>
 
                             </Paper>
@@ -151,7 +151,7 @@ function Ship() {
                         <Grid item xs={6}>
 
                             <Paper className={classes.layer}>
-                                <Typography component="p" variant="p">
+                                <Typography component="p" variant="body1">
                                     {skill.description}
                                 </Typography>
 
@@ -164,22 +164,10 @@ function Ship() {
     );
 }
 
-// class Skill {
-//     icon: string;       // url
-//     names: {
-//         en?: string;
-//         cn?: string;
-//         jp?: string;
-//         kr?: string;
-//     };
-//     description: string;
-//     color: string;      // descriptive color name (not hex code)
-// }
-
 export default Ship;
 
 
-function nameSelector(ship) {
+function nameSelector(ship : ShipType) {
     //Dragon Empery
     //Sakura Empire
     switch (ship.nationality.toLowerCase()) {

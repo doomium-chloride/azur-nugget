@@ -6,7 +6,7 @@ import {Button} from '@material-ui/core';
 
 const loadMoreBy = 5;
 
-class Juustagram extends React.Component{
+class Juustagram extends React.Component<{}, any, any>{
     constructor(props){
         super(props);
         this.state = {

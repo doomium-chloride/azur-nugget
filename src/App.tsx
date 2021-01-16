@@ -11,11 +11,12 @@ import FuzzySearch from 'fuzzy-search';
 
 import "./App.css";
 import Home from "./Home";
+import { shipContextType } from "./types/miscType";
+import BuildRate from "./pages/rate/BuildRate";
 
-const shipContextDefaultData = {
-    ships: [],
-    searchByName: () => []
-};
+const shipContextDefaultData : shipContextType = {
+    ships: []
+} as shipContextType;
 
 export const shipContext = createContext(shipContextDefaultData);
 
@@ -65,6 +66,7 @@ function App() {
                         <Build {...props} ships={ships.ships} />
                     )} />
                     <Route path="/juust" component={Juustagram} />
+                    <Route path="/rate" component={BuildRate} />
                     <Route exact path="/ship/:name" component={Ship} />
                     <Route path="/ships/:name?" component={ShipSearch} />
                     <Route exact path="/" component={Home} />

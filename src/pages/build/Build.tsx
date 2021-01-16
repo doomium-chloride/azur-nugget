@@ -3,13 +3,17 @@ import { buildTypes, buildTypeName } from '../../global';
 import {TextField, Card, CardActionArea, CardContent, FormControl,
     CardMedia, Typography, Grid, InputLabel, Select, MenuItem} from '@material-ui/core';
 import DisplayShipBuild from './ShipBuildCard';
+import { Ship } from '../../types/shipTypes';
 
 const searchSpan = 5;
 
-class Build extends React.Component {
-    constructor(props){
+type Props = {
+    ships: Array<Ship>
+};
+
+class Build extends React.Component<Props, any, any> {
+    constructor(props : Props){
         super(props);
-        console.log("props", props);
         this.state = {
             seconds: 0,
             minutes: 0,
@@ -56,7 +60,7 @@ class Build extends React.Component {
         });
     }
 
-    searchShip(timeStr){
+    searchShip(timeStr : string){
         const output = [];
         this.state.data.forEach(ship => {
             const constructionTime = ship.construction.constructionTime;
@@ -77,7 +81,6 @@ class Build extends React.Component {
         let ships = [];
 
         if(this.state.data){
-            const searcher = this.state.searcher;
             const searchTime = constructionTime(this.state.hours, 
                 this.state.minutes, this.state.seconds);
             if(searchTime != "00:00:00"){
@@ -190,7 +193,6 @@ function timeStr2Minutes(timeStr){
  * returns time between time1 and 2
  * @param {string} time1 
  * @param {string} time2 
- * @param {number} span 
  */
 function timeBetween(time1, time2){
     const mins1 = timeStr2Minutes(time1);
