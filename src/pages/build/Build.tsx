@@ -14,7 +14,6 @@ type Props = {
 class Build extends React.Component<Props, any, any> {
     constructor(props : Props){
         super(props);
-        console.log("props", props);
         this.state = {
             seconds: 0,
             minutes: 0,

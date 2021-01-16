@@ -60,7 +60,6 @@ function Ship() {
     const classes = useStyles();
     const context : shipContextType = useContext(shipContext);
     const { name } = useParams();
-    console.log("params", name);
     if (!name) {
         return null;
     }
