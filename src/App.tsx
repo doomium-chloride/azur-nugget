@@ -11,11 +11,11 @@ import FuzzySearch from 'fuzzy-search';
 
 import "./App.css";
 import Home from "./Home";
+import { shipContextType } from "./types/miscType";
 
-const shipContextDefaultData = {
-    ships: [],
-    searchByName: () => []
-};
+const shipContextDefaultData : shipContextType = {
+    ships: []
+} as shipContextType;
 
 export const shipContext = createContext(shipContextDefaultData);
 

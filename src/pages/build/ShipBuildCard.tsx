@@ -78,7 +78,7 @@ function DisplayShipBuild({ ship }) {
                     <Typography variant="h6" component="h4">
                         {types}
                     </Typography>
-                    <Typography variant="p" component="h5">
+                    <Typography variant="caption" component="h5">
                         {ship.construction.constructionTime}
                     </Typography>
                 </CardContent>
