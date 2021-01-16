@@ -10,6 +10,7 @@ import { shipInfoURL } from './global';
 import FuzzySearch from 'fuzzy-search';
 
 import "./App.css";
+import Home from "./Home";
 
 const shipContextDefaultData = {
     ships: [],
@@ -66,6 +67,7 @@ function App() {
                     <Route path="/juustagram" component={Juustagram} />
                     <Route exact path="/ship/:name" component={Ship} />
                     <Route path="/ships/:name?" component={ShipSearch} />
+                    <Route exact path="/" component={Home} />
                 </div>
             </BrowserRouter>
         </shipContext.Provider>

@@ -7,10 +7,18 @@ import { useEffect } from 'react';
 import debounce from 'lodash.debounce';
 import DisplayShipBuild from '../build/ShipBuildCard';
 import { useParams, useHistory } from 'react-router';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    main: {
+        padding: '0 1vw'
+    }
+}));
 
 function ShipSearch() {
     const context = useContext(shipContext);
     const history = useHistory();
+    const classes = useStyles();
     const { name } = useParams();
     const [query, setQuery] = useState(name || "");
 
@@ -34,7 +42,7 @@ function ShipSearch() {
      }, [query, delayedSearch]);
     
     return (
-        <div>
+        <div className={classes.main}>
             <h1>
                 Enter ship name
             </h1>
