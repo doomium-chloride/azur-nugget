@@ -65,7 +65,7 @@ function App() {
                     )} />
                     <Route path="/juustagram" component={Juustagram} />
                     <Route exact path="/ship/:name" component={Ship} />
-                    <Route path="/ship" component={ShipSearch} />
+                    <Route path="/ships/:name?" component={ShipSearch} />
                 </div>
             </BrowserRouter>
         </shipContext.Provider>

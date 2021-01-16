@@ -1,13 +1,37 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import Axios from 'axios';
 import { shipInfoURL } from '../../global';
 import { Paper, Grid, TextField, Typography } from "@material-ui/core";
 import {shipContext} from '../../App';
 import { useEffect } from 'react';
+import debounce from 'lodash.debounce';
+import DisplayShipBuild from '../build/ShipBuildCard';
+import { useParams, useHistory } from 'react-router';
 
 function ShipSearch() {
     const context = useContext(shipContext);
-    const [query, setQuery] = useState("");
+    const history = useHistory();
+    const { name } = useParams();
+    const [query, setQuery] = useState(name || "");
+
+    const [ships, setShips] = useState([]);
+
+    const delayedSearch = useCallback(debounce(name => {
+        if(name){
+            const shipList = context.byNameSearcher.search(name)
+            setShips(shipList);
+        } else{
+            setShips([]);
+        }
+        history.push(`/ships/${name}`);
+    }, 500), []);
+
+    useEffect(() => {
+        delayedSearch(query);
+     
+        // Cancel the debounce on useEffect cleanup.
+        return delayedSearch.cancel;
+     }, [query, delayedSearch]);
     
     return (
         <div>
@@ -27,6 +51,9 @@ function ShipSearch() {
                     />
                 </Grid>
             </Grid>
+            <div>
+                {ships.map((ship, i) => <DisplayShipBuild key={"ship-" + i} ship={ship} />)}
+            </div>
         </div>
     )
 }

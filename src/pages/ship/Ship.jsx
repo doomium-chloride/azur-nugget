@@ -72,9 +72,6 @@ function Ship() {
                         </Paper>
                     </Grid>
 
-
-
-
                 </Grid>
 
             </Grid>
