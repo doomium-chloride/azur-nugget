@@ -57,7 +57,7 @@ function Ship() {
                     <Grid item xs={12} >
                         <Paper className={classes.layer}>
                             <Typography component="h4" variant="h4">
-                                {ship.names.en}
+                                {nameSelector(ship)}
                             </Typography>
 
                         </Paper>
@@ -80,3 +80,17 @@ function Ship() {
 }
 
 export default Ship;
+
+
+function nameSelector(ship){
+//Dragon Empery
+//Sakura Empire
+    switch(ship.nationality.toLowerCase()){
+        case "sakura empire":
+            return ship.names.jp || ship.names.en;
+        case "dragon empery":
+            return ship.names.cn || ship.names.en;
+        default:
+            return ship.names.en;
+    }
+}
