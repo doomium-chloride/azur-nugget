@@ -64,7 +64,7 @@ function App() {
                     <Route path="/build" render={(props) => (
                         <Build {...props} ships={ships.ships} />
                     )} />
-                    <Route path="/juustagram" component={Juustagram} />
+                    <Route path="/juust" component={Juustagram} />
                     <Route exact path="/ship/:name" component={Ship} />
                     <Route path="/ships/:name?" component={ShipSearch} />
                     <Route exact path="/" component={Home} />
