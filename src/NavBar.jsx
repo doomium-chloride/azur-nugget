@@ -22,8 +22,8 @@ function NavBar(){
                 </Button>
             </Grid>
             <Grid item xs>
-                <Button onClick={() => history.push('/juustagram')}>
-                    Juustagram
+                <Button onClick={() => history.push('/juust')}>
+                    Juust
                 </Button>
             </Grid>
         </Grid>
