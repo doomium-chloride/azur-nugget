@@ -101,7 +101,6 @@ function BuildRate() {
 
     const chartHeight = getVH(60);
     const chartWidth = getVW(90);
-    console.log("size", chartHeight, chartWidth)
 
     return <div className={classes.main}>
         <h1 className={classes.title}>
