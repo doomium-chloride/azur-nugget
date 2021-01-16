@@ -19,7 +19,40 @@ const useStyles = makeStyles((theme) => ({
     content: {
         flex: '1 0 auto',
     },
+    section: {
+        marginBottom: '1vh'
+    },
+    title: {
+        padding: 'auto',
+        height: '100%',
+        width: '95%',
+        margin: 'auto',
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center"
+    },
+    main: {
+        padding: '0 1vw'
+    }
 }));
+
+function isNumeric(s) {
+    return !isNaN(s - parseFloat(s));
+}
+
+function fixSkillIconLink(shipId, link){
+    const keyWord = 'skills/';
+    const parts = link.split(keyWord);
+    const inject = keyWord + shipId + '/';
+    if(parts && parts.length == 2){
+        if(!isNumeric(parts[1].charAt(0))){
+            //needs fixing
+            return parts[0] + inject + parts[1];
+        }
+    }
+    //if problem or no fix needed send normal link
+    return link;
+}
 
 function Ship() {
     const classes = useStyles();
@@ -40,12 +73,13 @@ function Ship() {
     console.log("ship", ship);
 
     return (
-        <div>
+        <div className={classes.main}>
             <Grid
                 container
                 spacing={3}
                 alignItems={"stretch"}
                 justify={"center"}
+                className={classes.section}
             >
                 <Grid item xs={4}>
                     <Paper>
@@ -59,7 +93,6 @@ function Ship() {
                             <Typography component="h4" variant="h4">
                                 {nameSelector(ship)}
                             </Typography>
-
                         </Paper>
                     </Grid>
 
@@ -75,17 +108,81 @@ function Ship() {
                 </Grid>
 
             </Grid>
+
+            <div id={"ship-skills"}>
+                <Grid
+                    container
+                    spacing={3}
+                    alignItems={"stretch"}
+                    justify={"center"}
+                    className={classes.section}
+                >
+                    <Paper className={classes.title}>
+                        <Typography component="h3" variant="h3">
+                            Skills
+                        </Typography>
+                    </Paper>
+
+                </Grid>
+                {
+                    ship.skills.map((skill, i) => <Grid
+                        container
+                        spacing={3}
+                        alignItems={"stretch"}
+                        justify={"center"}
+                        className={classes.section}
+                    >
+                        <Grid item xs={3}>
+                            <Paper>
+                                <img src={fixSkillIconLink(ship.id, skill.icon)} width="128px" height="128px" />
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={3}>
+
+                            <Paper className={classes.layer} style={{
+                                    backgroundColor: skill.color
+                                }}>
+                                <Typography component="h5" variant="h5" >
+                                    {skill.names.en || skill.names.jp || skill.names.cn || skill.names.kr}
+                                </Typography>
+
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={6}>
+
+                            <Paper className={classes.layer}>
+                                <Typography component="p" variant="p">
+                                    {skill.description}
+                                </Typography>
+
+                            </Paper>
+                        </Grid>
+                    </Grid>)
+                }
+            </div>
         </div>
     );
 }
 
+// class Skill {
+//     icon: string;       // url
+//     names: {
+//         en?: string;
+//         cn?: string;
+//         jp?: string;
+//         kr?: string;
+//     };
+//     description: string;
+//     color: string;      // descriptive color name (not hex code)
+// }
+
 export default Ship;
 
 
-function nameSelector(ship){
-//Dragon Empery
-//Sakura Empire
-    switch(ship.nationality.toLowerCase()){
+function nameSelector(ship) {
+    //Dragon Empery
+    //Sakura Empire
+    switch (ship.nationality.toLowerCase()) {
         case "sakura empire":
             return ship.names.jp || ship.names.en;
         case "dragon empery":

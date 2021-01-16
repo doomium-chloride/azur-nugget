@@ -12,6 +12,11 @@ function NavBar(){
                 </Button>
             </Grid>
             <Grid item xs>
+                <Button onClick={() => history.push('/ships')}>
+                    Ships
+                </Button>
+            </Grid>
+            <Grid item xs>
                 <Button onClick={() => history.push('/build')}>
                     Build time
                 </Button>
