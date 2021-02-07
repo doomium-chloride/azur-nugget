@@ -1,11 +1,19 @@
 import React from 'react';
-import {Grid, Button} from '@material-ui/core';
+import {Grid, Button, makeStyles} from '@material-ui/core';
 import { useHistory } from "react-router-dom";
+
+const useStyles = makeStyles((theme) => ({
+    navbar: {
+        padding: '0 1vw',
+        width: '100vw'
+    }
+}));
 
 function NavBar(){
     const history = useHistory();
+    const classes = useStyles();
     return(
-        <Grid container spacing={2} alignItems='center'>
+        <Grid container spacing={2} alignItems='center' className={classes.navbar}>
             <Grid item xs>
                 <Button onClick={() => history.push('/')}>
                     Home
