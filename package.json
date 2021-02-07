@@ -13,6 +13,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-plotly.js": "^2.2.4",
+    "@types/react-router-dom": "^5.1.7",
     "axios": "^0.20.0",
     "chart.js": "^2.9.4",
     "fuzzy-search": "^3.2.1",

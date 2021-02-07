@@ -67,7 +67,7 @@ function App() {
                     )} />
                     <Route path="/juust" component={Juustagram} />
                     <Route path="/rate" component={BuildRate} />
-                    <Route exact path="/ship/:name" component={Ship} />
+                    <Route exact path="/ship/:name/:code?" component={Ship} />
                     <Route path="/ships/:name?" component={ShipSearch} />
                     <Route exact path="/" component={Home} />
                 </div>

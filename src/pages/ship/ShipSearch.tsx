@@ -8,6 +8,7 @@ import debounce from 'lodash.debounce';
 import DisplayShipBuild from '../build/ShipBuildCard';
 import { useParams, useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
+import { ShipParams } from './Ship';
 
 const useStyles = makeStyles((theme) => ({
     main: {
@@ -19,7 +20,7 @@ function ShipSearch() {
     const context = useContext(shipContext);
     const history = useHistory();
     const classes = useStyles();
-    const { name } = useParams();
+    const { name } = useParams<ShipParams>();
     const [query, setQuery] = useState(name || "");
 
     const [ships, setShips] = useState([]);

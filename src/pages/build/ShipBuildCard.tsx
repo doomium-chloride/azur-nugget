@@ -1,16 +1,20 @@
 import React from 'react';
-import { buildTypes, buildTypeName } from '../../global';
+import { buildTypes } from '../../global';
 import {
-    TextField, Card, CardActionArea, CardContent, FormControl,
-    CardMedia, Typography, Grid, InputLabel, Select, MenuItem
+    Card,
+    CardActionArea,
+    CardContent,
+    CardMedia,
+    Typography,
 } from '@material-ui/core';
-import {useHistory} from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import { Ship } from '../../types/shipTypes';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        padding: '5%'
+        padding: '5%',
     },
     details: {
         display: 'flex',
@@ -34,15 +38,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function getBuildTypes(ship){
+function getBuildTypes(ship) {
     let types = [];
     const availablity = ship.construction.availableIn;
-    for(let i = 0; i < buildTypes.length; i++){
+    for (let i = 0; i < buildTypes.length; i++) {
         const type = buildTypes[i];
-        if(availablity[type]){
-            if(type == 'limited'){
+        if (availablity[type]) {
+            if (type == 'limited') {
                 types.push(availablity.limited);
-            } else if(type == 'aviation'){
+            } else if (type == 'aviation') {
                 types.push('special');
             } else {
                 types.push(type);
@@ -52,8 +56,17 @@ function getBuildTypes(ship){
     return types.join(', ');
 }
 
-function sendToInfo(history, ship){
-    return () => history.push(`/ship/${ship.names.en}`);
+const shipPath: string = '/ship/';
+
+function sendToInfo(history, ship: Ship) {
+    const currentPath: string = history.location.pathname;
+    const splitPath: string[] = currentPath.split(shipPath);
+    const basePath = splitPath[0];
+    if(splitPath.length <= 1 || !basePath){
+        return () => history.push(`${shipPath}${ship.names.en}/${ship.names.code}`);
+    } else {
+        return () => history.push(`${basePath}${shipPath}${ship.names.en}/${ship.names.code}`);
+    }
 }
 
 function DisplayShipBuild({ ship }) {
@@ -62,17 +75,22 @@ function DisplayShipBuild({ ship }) {
     const classes = useStyles();
     return (
         <Card className={classes.root}>
-            <CardActionArea className={classes.details} onClick={sendToInfo(history, ship)}>
-                <CardMedia
-                    title={ship.names.code}
-                >
+            <CardActionArea
+                className={classes.details}
+                onClick={sendToInfo(history, ship)}
+            >
+                <CardMedia title={ship.names.code}>
                     <img src={ship.thumbnail} width="166px" height="166px" />
                 </CardMedia>
                 <CardContent className={classes.content}>
                     <Typography gutterBottom variant="h5" component="h2">
                         {ship.names.en}
                     </Typography>
-                    <Typography variant="h6" color="textSecondary" component="h4">
+                    <Typography
+                        variant="h6"
+                        color="textSecondary"
+                        component="h4"
+                    >
                         {ship.rarity}
                     </Typography>
                     <Typography variant="h6" component="h4">
@@ -84,7 +102,7 @@ function DisplayShipBuild({ ship }) {
                 </CardContent>
             </CardActionArea>
         </Card>
-    )
+    );
 }
 
 export default DisplayShipBuild;
