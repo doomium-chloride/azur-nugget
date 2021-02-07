@@ -11,3 +11,10 @@ I don't own any of the assets.
 <https://azur-nugget.herokuapp.com/>
 
 It might take a while for the dynamo to start because I use free hosting.
+
+## Github pages
+
+<http://doomium-chloride.github.io/azur-nugget>
+
+I didn't realise I could host it on github.
+Use the github one, no dynamo needs to be started.

@@ -131,7 +131,7 @@ function BuildRate() {
                     variant={"outlined"}
                     value={pulls}
                     onChange={handleInputChange}
-                    InputProps={{ inputProps: { min: minBuild, max: maxBuild } }}
+                    InputProps={{ inputProps: { min: minBuild } }}
                 />
             </Grid>
             <Grid item xs={3}>
