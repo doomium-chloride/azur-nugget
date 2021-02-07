@@ -1,13 +1,19 @@
 import React from 'react';
-import { buildTypes } from '../../global';
+import { buildTypes, buildTypeName } from '../../global';
 import {
+    TextField,
     Card,
     CardActionArea,
     CardContent,
+    FormControl,
     CardMedia,
     Typography,
+    Grid,
+    InputLabel,
+    Select,
+    MenuItem,
 } from '@material-ui/core';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Ship } from '../../types/shipTypes';
 
@@ -56,17 +62,8 @@ function getBuildTypes(ship) {
     return types.join(', ');
 }
 
-const shipPath: string = '/ship/';
-
 function sendToInfo(history, ship: Ship) {
-    const currentPath: string = history.location.pathname;
-    const splitPath: string[] = currentPath.split(shipPath);
-    const basePath = splitPath[0];
-    if(splitPath.length <= 1 || !basePath){
-        return () => history.push(`${shipPath}${ship.names.en}/${ship.names.code}`);
-    } else {
-        return () => history.push(`${basePath}${shipPath}${ship.names.en}/${ship.names.code}`);
-    }
+    return () => history.push(`/ship/${ship.names.en}/${ship.names.code}`);
 }
 
 function DisplayShipBuild({ ship }) {

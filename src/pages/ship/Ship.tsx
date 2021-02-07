@@ -47,10 +47,7 @@ function fixSkillIconLink(shipId, link) {
     const parts = link.split(keyWord);
     const inject = keyWord + shipId + '/';
     if (parts && parts.length == 2) {
-        if (!isNumeric(parts[1].charAt(0))) {
-            //needs fixing
-            return parts[0] + inject + parts[1];
-        }
+        return parts[0] + inject + parts[1];
     }
     //if problem or no fix needed send normal link
     return link;

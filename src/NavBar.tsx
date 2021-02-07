@@ -9,46 +9,33 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const deployedBase: string = '/azur-nugget';
-
-function sendToPage(history, path: string) {
-    const currentPath: string = history.location.pathname;
-    const splitPath: string[] = currentPath.split('/');
-    const basePath = splitPath[0];
-    if(basePath.startsWith(deployedBase)){
-        return () => history.push(`${deployedBase}/${path}`);
-    } else {
-        return () => history.push(`/${path}`);
-    }
-}
-
 function NavBar(){
     const history = useHistory();
     const classes = useStyles();
     return(
         <Grid container spacing={2} alignItems='center' className={classes.navbar}>
             <Grid item xs>
-                <Button onClick={sendToPage(history, '')}>
+                <Button onClick={() => history.push('/')}>
                     Home
                 </Button>
             </Grid>
             <Grid item xs>
-                <Button onClick={sendToPage(history, 'ships')}>
+                <Button onClick={() => history.push('/ships')}>
                     Ships
                 </Button>
             </Grid>
             <Grid item xs>
-                <Button onClick={sendToPage(history, 'build')}>
+                <Button onClick={() => history.push('/build')}>
                     Build time
                 </Button>
             </Grid>
             <Grid item xs>
-                <Button onClick={sendToPage(history, 'rate')}>
+                <Button onClick={() => history.push('/rate')}>
                     Build rate
                 </Button>
             </Grid>
             <Grid item xs>
-                <Button onClick={sendToPage(history, 'juust')}>
+                <Button onClick={() => history.push('/juust')}>
                     Juust
                 </Button>
             </Grid>

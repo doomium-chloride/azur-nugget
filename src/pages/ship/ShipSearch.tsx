@@ -16,6 +16,12 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const shipSearchPath: string = 'ships';
+
+function updatePath(history, name: string) {
+    history.push(`/${shipSearchPath}/${name}`);
+}
+
 function ShipSearch() {
     const context = useContext(shipContext);
     const history = useHistory();
@@ -32,7 +38,7 @@ function ShipSearch() {
         } else{
             setShips([]);
         }
-        history.push(`/ships/${name}`);
+        updatePath(history, name);
     }, 500), []);
 
     useEffect(() => {
