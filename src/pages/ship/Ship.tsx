@@ -46,7 +46,7 @@ function checkIfSkillFixNeeded(str: string){
     const parts = str.split('/');
     if(parts.length > 0){
         const check = parts[0];
-        return !isNaN(check as any);
+        return isNaN(check as any);
     }
     return false;
 }
