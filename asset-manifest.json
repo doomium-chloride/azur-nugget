@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/azur-nugget/static/css/main.b31a519f.chunk.css",
-    "main.js": "/azur-nugget/static/js/main.7b78092a.chunk.js",
-    "main.js.map": "/azur-nugget/static/js/main.7b78092a.chunk.js.map",
+    "main.js": "/azur-nugget/static/js/main.b1411442.chunk.js",
+    "main.js.map": "/azur-nugget/static/js/main.b1411442.chunk.js.map",
     "runtime-main.js": "/azur-nugget/static/js/runtime-main.700eb155.js",
     "runtime-main.js.map": "/azur-nugget/static/js/runtime-main.700eb155.js.map",
     "static/js/2.4d31f4bb.chunk.js": "/azur-nugget/static/js/2.4d31f4bb.chunk.js",
     "static/js/2.4d31f4bb.chunk.js.map": "/azur-nugget/static/js/2.4d31f4bb.chunk.js.map",
     "index.html": "/azur-nugget/index.html",
-    "precache-manifest.77fba3ffe6ff49b8005c995de089b654.js": "/azur-nugget/precache-manifest.77fba3ffe6ff49b8005c995de089b654.js",
+    "precache-manifest.e1e103f721a90db2634446c3ab710d81.js": "/azur-nugget/precache-manifest.e1e103f721a90db2634446c3ab710d81.js",
     "service-worker.js": "/azur-nugget/service-worker.js",
     "static/css/main.b31a519f.chunk.css.map": "/azur-nugget/static/css/main.b31a519f.chunk.css.map",
     "static/js/2.4d31f4bb.chunk.js.LICENSE.txt": "/azur-nugget/static/js/2.4d31f4bb.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.700eb155.js",
     "static/js/2.4d31f4bb.chunk.js",
     "static/css/main.b31a519f.chunk.css",
-    "static/js/main.7b78092a.chunk.js"
+    "static/js/main.b1411442.chunk.js"
   ]
 }
