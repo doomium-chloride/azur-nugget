@@ -42,11 +42,20 @@ function isNumeric(s) {
     return !isNaN(s - parseFloat(s));
 }
 
+function checkIfSkillFixNeeded(str: string){
+    const parts = str.split('/');
+    if(parts.length > 0){
+        const check = parts[0];
+        return !isNaN(check as any);
+    }
+    return false;
+}
+
 function fixSkillIconLink(shipId, link) {
     const keyWord = 'skills/';
     const parts = link.split(keyWord);
     const inject = keyWord + shipId + '/';
-    if (parts && parts.length == 2) {
+    if (parts && parts.length == 2 && checkIfSkillFixNeeded(parts[1])) {
         return parts[0] + inject + parts[1];
     }
     //if problem or no fix needed send normal link
