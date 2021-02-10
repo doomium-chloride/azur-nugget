@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import Build from "./pages/build/Build";
 import Ship from "./pages/ship/Ship";
 import ShipSearch from "./pages/ship/ShipSearch";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Route, HashRouter } from "react-router-dom";
 import NavBar from "./NavBar";
 import Juustagram from "./pages/juust/Juustagram";
 import Axios from 'axios';
@@ -59,7 +59,7 @@ function App() {
 
     return (
         <shipContext.Provider value={ships}>
-            <BrowserRouter basename={process.env.PUBLIC_URL}>
+            <HashRouter basename={process.env.PUBLIC_URL}>
                 <NavBar />
                 <div className="App">
                     <Route path="/build" render={(props) => (
@@ -71,7 +71,7 @@ function App() {
                     <Route path="/ships/:name?" component={ShipSearch} />
                     <Route exact path="/" component={Home} />
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         </shipContext.Provider>
     );
 }
