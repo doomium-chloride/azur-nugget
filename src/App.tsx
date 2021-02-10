@@ -59,7 +59,7 @@ function App() {
 
     return (
         <shipContext.Provider value={ships}>
-            <BrowserRouter basename="azur-nugget">
+            <BrowserRouter basename={process.env.PUBLIC_URL}>
                 <NavBar />
                 <div className="App">
                     <Route path="/build" render={(props) => (
