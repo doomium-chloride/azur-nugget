@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0eb26b24144d1ae8338144c8995b2a64",
+    "revision": "7839740229f384e2ec192e1699f1f1c2",
     "url": "/azur-nugget/index.html"
   },
   {
-    "revision": "648b2895154c788d311e",
+    "revision": "dcdb798694fb1e86ed81",
     "url": "/azur-nugget/static/css/main.b31a519f.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/azur-nugget/static/js/2.4d31f4bb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "648b2895154c788d311e",
-    "url": "/azur-nugget/static/js/main.af27239a.chunk.js"
+    "revision": "dcdb798694fb1e86ed81",
+    "url": "/azur-nugget/static/js/main.7b78092a.chunk.js"
   },
   {
     "revision": "8abf9a35fffe05f68aac",
