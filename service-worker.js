@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/azur-nugget/precache-manifest.b61fab56b06bb4abfa0f3b16c5f2349f.js"
+  "/azur-nugget/precache-manifest.2999aafccc8128e2c60f709900294b09.js"
 );
 
 self.addEventListener('message', (event) => {
