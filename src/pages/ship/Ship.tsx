@@ -42,9 +42,9 @@ function isNumeric(s) {
     return !isNaN(s - parseFloat(s));
 }
 
-function checkIfSkillFixNeeded(str: string){
+function checkIfSkillFixNeeded(str: string) {
     const parts = str.split('/');
-    if(parts.length > 0){
+    if (parts.length > 0) {
         const check = parts[0];
         return isNaN(check as any);
     }
@@ -60,6 +60,31 @@ function fixSkillIconLink(shipId, link) {
     }
     //if problem or no fix needed send normal link
     return link;
+}
+
+export function sameName(ship: ShipType, name: string){
+    if(ship.names.en.toLowerCase() === name.toLowerCase()){
+        return true;
+    }
+    if(ship.names.jp && ship.names.jp === name){
+        return true;
+    }
+    if(ship.names.en && ship.names.en === name){
+        return true;
+    }
+    return false;
+}
+
+function getBestMatchingShip(results: ShipType[], name: string, code: string | undefined) {
+    if (!!code) {
+        for (let i = 0; i < results.length; i++) {
+            const peekShip = results[i];
+            if (peekShip.names.code === code && sameName(peekShip, name)) {
+                return peekShip;
+            }
+        }
+    }
+    return results[0];
 }
 
 export interface ShipParams {
@@ -81,17 +106,7 @@ function Ship() {
         return null;
     }
 
-    let ship: ShipType = results[0];
-
-    if (!!code) {
-        for (let i = 0; i < results.length; i++) {
-            const peekShip = results[i];
-            if (peekShip.names.code === code) {
-                ship = peekShip;
-                break;
-            }
-        }
-    }
+    let ship: ShipType = getBestMatchingShip(results, name, code);
 
     return (
         <div className={classes.main}>

@@ -8,7 +8,8 @@ import debounce from 'lodash.debounce';
 import DisplayShipBuild from '../build/ShipBuildCard';
 import { useParams, useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
-import { ShipParams } from './Ship';
+import { ShipParams, sameName } from './Ship';
+import { Ship } from '../../types/shipTypes';
 
 const useStyles = makeStyles((theme) => ({
     main: {
@@ -47,6 +48,8 @@ function ShipSearch() {
         // Cancel the debounce on useEffect cleanup.
         return delayedSearch.cancel;
      }, [query, delayedSearch]);
+
+    const sortedShips: Ship[] = resortShips(ships, query);
     
     return (
         <div className={classes.main}>
@@ -67,10 +70,25 @@ function ShipSearch() {
                 </Grid>
             </Grid>
             <div>
-                {ships.map((ship, i) => <DisplayShipBuild key={"ship-" + i} ship={ship} />)}
+                {sortedShips.map((ship, i) => <DisplayShipBuild key={"ship-" + i} ship={ship} />)}
             </div>
         </div>
     )
+}
+
+function resortShips(ships: Ship[], query: string) {
+    let index: number = -1;
+    ships.forEach((ship, i) => {
+        if(sameName(ship, query)){
+            index = i;
+        }
+    });
+    if(index !== -1){
+        const [exactMatch] = ships.splice(index, 1);
+        ships.unshift(exactMatch);
+        return ships;
+    }
+    return ships;
 }
 
 export default ShipSearch;
