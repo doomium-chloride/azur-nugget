@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/azur-nugget/static/css/main.b31a519f.chunk.css",
-    "main.js": "/azur-nugget/static/js/main.0ac2583c.chunk.js",
-    "main.js.map": "/azur-nugget/static/js/main.0ac2583c.chunk.js.map",
+    "main.js": "/azur-nugget/static/js/main.57bc61d2.chunk.js",
+    "main.js.map": "/azur-nugget/static/js/main.57bc61d2.chunk.js.map",
     "runtime-main.js": "/azur-nugget/static/js/runtime-main.700eb155.js",
     "runtime-main.js.map": "/azur-nugget/static/js/runtime-main.700eb155.js.map",
-    "static/js/2.93ef3509.chunk.js": "/azur-nugget/static/js/2.93ef3509.chunk.js",
-    "static/js/2.93ef3509.chunk.js.map": "/azur-nugget/static/js/2.93ef3509.chunk.js.map",
+    "static/js/2.552551f4.chunk.js": "/azur-nugget/static/js/2.552551f4.chunk.js",
+    "static/js/2.552551f4.chunk.js.map": "/azur-nugget/static/js/2.552551f4.chunk.js.map",
     "index.html": "/azur-nugget/index.html",
-    "precache-manifest.d48811025ccf24687e5ddd41875d782a.js": "/azur-nugget/precache-manifest.d48811025ccf24687e5ddd41875d782a.js",
+    "precache-manifest.b61fab56b06bb4abfa0f3b16c5f2349f.js": "/azur-nugget/precache-manifest.b61fab56b06bb4abfa0f3b16c5f2349f.js",
     "service-worker.js": "/azur-nugget/service-worker.js",
     "static/css/main.b31a519f.chunk.css.map": "/azur-nugget/static/css/main.b31a519f.chunk.css.map",
-    "static/js/2.93ef3509.chunk.js.LICENSE.txt": "/azur-nugget/static/js/2.93ef3509.chunk.js.LICENSE.txt"
+    "static/js/2.552551f4.chunk.js.LICENSE.txt": "/azur-nugget/static/js/2.552551f4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.700eb155.js",
-    "static/js/2.93ef3509.chunk.js",
+    "static/js/2.552551f4.chunk.js",
     "static/css/main.b31a519f.chunk.css",
-    "static/js/main.0ac2583c.chunk.js"
+    "static/js/main.57bc61d2.chunk.js"
   ]
 }
