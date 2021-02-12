@@ -59,7 +59,7 @@ function App() {
 
     return (
         <shipContext.Provider value={ships}>
-            <HashRouter basename={process.env.PUBLIC_URL}>
+            <HashRouter>
                 <NavBar />
                 <div className="App">
                     <Route path="/build" render={(props) => (
